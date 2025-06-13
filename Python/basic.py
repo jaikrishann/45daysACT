@@ -1,10 +1,13 @@
-a = 10 
-b = True
-c = "Hello"
+# a = 10 
+# b = True
+# c = "Hello"
 
-print(type(a))
-print(type(b))           # 
-print(type(c))
+# print(type(a))
+# print(type(b))           # 
+# print(type(c))
 
 ##data types 
 ## str , list , tuple , sets , dict 
+
+def addfunction(a,b):
+    return a+b

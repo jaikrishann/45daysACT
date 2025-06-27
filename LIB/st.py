@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import altair as alt 
+import time
 
 ##page configuration 
 st.set_page_config(
@@ -28,7 +29,7 @@ st.divider()
 
 ##metrices and messages 
 st.header("2. metrices and messages")
-st.metric(label="Revenue",value=1234,delta="+10%",delta_color="inverse")
+st.metric(label="Revenue",value=1234,delta="+10%",delta_color="normal")
 st.error("this is an error message")
 st.warning("this is a warning message")
 st.info("this is an info message")
@@ -56,3 +57,82 @@ fig , ax = plt.subplots()
 ax.plot(df.index,df.a)
 st.pyplot(fig)
 st.divider()
+
+##widgets
+st.header("5. widgets")
+with st.form("Input form"):
+    name = st.text_input("Enter your name", type="password")
+    age = st.number_input("Enter your age")
+    mood = st.radio("Select your mood",("happy","sad","neutral"))
+    languages = st.multiselect("Select your languages",("English","French","German"))
+    submit = st.form_submit_button("Submit")
+    if submit :
+        st.success(f"Name : {name}, Age : {int(age)}, Mood : {mood}, Languages : {languages}")
+
+
+
+col1 , col2,col3 = st.columns([4,1,1])
+with col1:
+    st.text_input("Enter your name")
+    st.number_input("Enter your age")
+with col2:
+    st.radio("Select your mood",("happy","sad","neutral"))
+    st.multiselect("Select your languages",("English","French","German"))
+with col3:
+    
+    st.title("Output")
+
+##we can divide form into multiple columns
+#for that first define form then define columns 
+with st.form("input form "):
+    col1 , col2 = st.columns(2)
+    with col1:
+        name = st.text_input("Enter your name")
+        age = st.number_input("Enter your age")
+    with col2:
+        mood = st.radio("Select your mood",("happy","sad","neutral"))
+        languages = st.multiselect("Select your languages",("English","French","German"))
+    submit = st.form_submit_button("Submit")
+    if submit :
+        st.success(f"Name : {name}, Age : {int(age)}, Mood : {mood}, Languages : {languages}")
+
+
+col1 , col2 = st.columns(2)
+with col1:
+    number = st.slider("Select a number",0,100)
+with col2:
+    colour = st.color_picker("Select a colour","#DC8080")
+
+
+st.text_area("Enter your message")
+st.date_input("Select a date")
+st.time_input("Select a time")
+st.file_uploader("Upload a file")
+st.divider()
+##media 
+st.header("6. media")
+st.image("https://picsum.photos/400",caption="random image")
+st.video("https://www.w3schools.com/html/mov_bbb.mp4")
+st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
+
+
+
+##sidebar and layout 
+st.sidebar.header("sidebar header")
+st.sidebar.write("this is a sidebar text")
+st.sidebar.button("click me")
+option = st.sidebar.selectbox("select an option",("option 1","option 2","option 3"))
+
+with st.container():
+    st.write("this is a container")
+
+with st.expander("expander header"):
+    st.write("this is an expander")
+
+with st.spinner("loading data..."):
+    time.sleep(2)
+# st.success("data loaded")
+st.toast("toast message",icon="👋")
+
+st.page_link("http://streamlit.io",label = "streamlit website", icon="👌")
+    

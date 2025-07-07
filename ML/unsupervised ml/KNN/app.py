@@ -10,11 +10,11 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/predict',methods=['POST',"GET"])
+@app.route('/predict',methods=["GET","POST"])
 def predict():
     if request.method == "POST":
         n  = int(request.form["nitrogen"])
-        p  = int(request.form["phosphorous"])
+        p  = int(request.form["phosphorus"])
         k  = int(request.form["potassium"])
         t  = float(request.form["temperature"])
         h  = float(request.form["humidity"])
@@ -26,11 +26,11 @@ def predict():
         print(prediction)
         dt = dict(df[df["cluster_8"]==prediction]["label"].value_counts())
         return render_template('index.html',dt = dt)
-        ls = []
-        for k , v in dt.items():
-            if v>= 70:
-                ls.append(k)
-        return jsonify(ls)    
+        # ls = []
+        # for k , v in dt.items():
+        #     if v>= 70:
+        #         ls.append(k)
+        # return jsonify(ls)    
       
 if __name__ == '__main__':
     app.run(debug=True)
